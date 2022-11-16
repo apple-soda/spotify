@@ -17,19 +17,20 @@
 
 <body style="background-color:black">
     <div class="d-flex flex-column"">
-        <div class="p-5">
-            <h1 style="color:white; text-align: center">{{ playlist_name }}</h1>
-        </div>
-        <div class="d-flex justify-content-between">
-            <div class="p-1 mb-5 ml-5">
-                idk
+        <div class="d-flex justify-content-center">
+            <div class="p-5 d-flex flex-column">
+                <div><h1 style="color:white; text-align: center">{{ playlist_name }}</h1></div>
+                <div class="d-flex flex-row">
+                    <img src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/heart-icon.png" height="42px" width="42px">
+                    <h3 style="padding-left: 15px; padding-top: 4px; color: white">152</h3>
+                </div>
+                <div class="d-flex flex-row">
+                    <img src="https://freeiconshop.com/wp-content/uploads/edd/music-quavers-flat.png" height="42px" width="42px">
+                    <h3 style="padding-left: 15px; padding-top: 4px; color: white">285</h3>
+                </div>
             </div>
-
-            <div class="p-1 mb-5">
+            <div class="p-2 mt-5 mb-5">
                 <img src="{{ playlist_img_url }}" height="400px" width="400px" class="center">
-            </div>
-            <div class="p-1 mb-5 mr-5">
-                <img src="{{ playlist_img_url }}" height="400px" width="400px">
             </div>
         </div>
 
