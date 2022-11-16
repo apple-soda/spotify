@@ -1,4 +1,3 @@
-"""Spotify main view."""
 import spotify
 
 @spotify.app.route('/')
