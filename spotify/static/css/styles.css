@@ -49,17 +49,6 @@ h1 {
     -o-transform: scale(1.1);
 }
 
-table {
-    height: 300px;
-    max-width: 600px;
-    margin: 0 auto;
-    border-spacing: 0 8px;
-}
-
-.table th {
-    padding: 100px;
-}
-
 .tran {
     transform: translate(0px, 100%);
     -webkit-transform: translate(0px, 100%);
@@ -108,4 +97,183 @@ table {
 
 .container:hover .overlay {
     opacity: 1;
+}
+
+/* BAR CHART CSS */
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+}
+
+#my-chart {
+    max-width: 1000px;
+    height: 300px;
+    margin: 0 auto;
+    --color: black;
+    background-color: white;
+}
+
+#my-chart.bar{
+    max-width: 50px;
+    max-height: 100px;
+    --color: white;
+}
+
+#my-chart tbody {
+    overflow-y: hidden;
+}
+
+#my-chart tbody th {
+    background-color: white;
+    z-index: 1;
+    --color: white;
+}
+
+#my-chart tbody td {
+    animation: moving-bars 10s linear infinite;
+}
+
+@keyframes moving-bars {
+    0%  { transform: translateY( 100% ); }
+    15% { transform: translateY( 0 ); }
+}
+
+.chart-container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vh;
+    margin: 0;
+}
+
+#my-chart-2 {
+    width: 500px;
+    max-height: 75px;
+    --color: white;
+}
+
+#my-chart-2.bar{
+    max-width: 500px;
+    max-height: 75px;
+    --color: white;
+}
+
+#my-chart-2 tbody {
+    overflow-x: hidden;
+}
+
+#my-chart-2 tbody th {
+    background-color: black;
+    z-index: 1;
+    --color: black;
+}
+
+#my-chart-2 tbody td {
+    animation: moving-bars-2 10s linear infinite;
+    transform-origin: left;
+}
+
+@keyframes moving-bars-2{
+    0%  { transform: translateX( 100% ); }
+    15% { transform: translateY( 0 ); }
+}
+
+
+/* rainbow spinner */
+.loader {
+    background: black;
+    background: radial-gradient(#222, #000);
+    overflow: hidden;
+    position: fixed;
+    z-index: -1;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+}
+
+.loader-inner {
+    bottom: 0;
+    height: 60px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100px;
+}
+
+.loader-line-wrap {
+    animation: 
+		spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite
+	;
+    box-sizing: border-box;
+    height: 50px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transform-origin: 50% 100%;
+    width: 100px;
+}
+.loader-line {
+    border: 4px solid transparent;
+    border-radius: 100%;
+    box-sizing: border-box;
+    height: 100px;
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100px;
+}
+.loader-line-wrap:nth-child(1) { animation-delay: -50ms; }
+.loader-line-wrap:nth-child(2) { animation-delay: -100ms; }
+.loader-line-wrap:nth-child(3) { animation-delay: -150ms; }
+.loader-line-wrap:nth-child(4) { animation-delay: -200ms; }
+.loader-line-wrap:nth-child(5) { animation-delay: -250ms; }
+
+.loader-line-wrap:nth-child(1) .loader-line {
+    border-color: hsl(120, 80%, 60%);
+    height: 90px;
+    width: 90px;
+    top: 7px;
+}
+.loader-line-wrap:nth-child(2) .loader-line {
+    border-color: hsl(120, 80%, 60%);
+    height: 76px;
+    width: 76px;
+    top: 14px;
+}
+.loader-line-wrap:nth-child(3) .loader-line {
+    border-color: hsl(120, 80%, 60%);
+    height: 62px;
+    width: 62px;
+    top: 21px;
+}
+.loader-line-wrap:nth-child(4) .loader-line {
+    border-color: hsl(120, 80%, 60%);
+    height: 48px;
+    width: 48px;
+    top: 28px;
+}
+.loader-line-wrap:nth-child(5) .loader-line {
+    border-color: hsl(120, 80%, 60%);
+    height: 34px;
+    width: 34px;
+    top: 35px;
+}
+
+@keyframes spin {
+    0%, 15% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

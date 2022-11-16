@@ -16,48 +16,59 @@
 </head>
 
 <body style="background-color:black">
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column"">
         <div class="p-5">
             <h1 style="color:white; text-align: center">{{ playlist_name }}</h1>
         </div>
-        <div class="p-1 align-self-center mb-5">
-            <img src="{{ playlist_img_url }}" height="400px" width="400px">
-        </div>
+        <div class="d-flex justify-content-between">
+            <div class="p-1 mb-5 ml-5">
+                idk
+            </div>
 
-        <div class="p-5">
-            <h1 style="color:white; text-align:center">ur top artists:</h1>
+            <div class="p-1 mb-5">
+                <img src="{{ playlist_img_url }}" height="400px" width="400px" class="center">
+            </div>
+            <div class="p-1 mb-5 mr-5">
+                <img src="{{ playlist_img_url }}" height="400px" width="400px">
+            </div>
         </div>
 
         <!-- TOP ARTISTS TABLE -->
-        <div class="p-5 align-self-left">
-            <table class="charts-css column show-data-axes show-labels">
+        <div class="p-5" style="background-color: white">
+            <h1 style="color:black; text-align:center">ur top artists:</h1>
+        </div>
+        <div class="p-1 align-self-left chart-container" style="background-color:white">
+            <table class="charts-css column show-data-axes show-labels data-spacing-5" id="my-chart">
                 <caption> Top Artists </caption>
                 <tbody>
                     {% for artist in top_artists %}
                     <tr>
-                        <td style="--size: {{ artist[1] / 10}};"> {{ artist[1] }} </td>
-                        <th scope="row" style="color:white"> {{ artist[0] }} </th>
+                        <td style="--size: {{ artist[1] / top_artists[0][1] }};"> {{ artist[1] }} </td>
+                        <th scope="row" style="color:black"> {{ artist[0] }} </th>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+    </div>
 
-        <div class="p-2">
-            <h1 style="text-align: center; color:white">ur top albums:</h1>
-        </div>
+    <div class="p-2">
+        <h1 style="text-align: center; color:white">ur top albums:</h1>
+    </div>
 
-        <div class="p-5 d-flex flex-row justify-content-center">
-            {% for i in top_albums %}
-            <div class="p-1 container">
-                <img src="{{ i[2] }}" height="85%" width="85%" class="center"><br>
-                <div class="overlay">
-                    <div class="text">{{ i[1] }}</div>
-                </div>
-                <h5 style="color:white; padding-top: 10px;">{{ i[0] }}</h5>
+    <div class="p-5 d-flex flex-row justify-content-center">
+        {% for i in top_albums %}
+        <div class="p-1 container">
+            <img src="{{ i[2] }}" height="85%" width="85%" class="center"><br>
+            <div class="overlay">
+                <div class="text">{{ i[1] }}</div>
             </div>
-            {% endfor %}
+            <h5 style="color:white; padding-top: 10px;">{{ i[0] }}</h5>
         </div>
+        {% endfor %}
+    </div>
+
+        
 
         <!-- TOP ALBUMS TABLE -->
         <!-- PROBABLY REPLACING THIS TABLE SHIT WITH SOME PICTURES  -->
@@ -77,8 +88,17 @@
 
         <div class="p-5"></div> -->
 
-    </div>
-
+        <!-- <table class="charts-css bar data-spacing-10 show-labels" id="my-chart-2">
+            <tr>
+                <td style="--size: 0.5">141</td> -->
+                <!-- can replace this with an icon -->
+                <!-- <th scope="row" style="color:white">Likes</th> 
+            </tr>
+            <tr>
+                <td style="--size: 0.8">282</td>
+                <th scope="row" style="color:white">Songs</th>
+            </tr>
+        </table> -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

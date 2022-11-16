@@ -46,13 +46,14 @@ def main():
 
         playlist_img_url = raw_playlist_data['images'][0]['url']
 
-        num_artist = 5
+        num_artist = 10
         num_album = 5
 
         # god genius coder matty right here fr
         a = list(artists_d.keys())[-num_artist:][::-1]
         c = list(artists_d.values())[-num_artist:][::-1]
         top_artists = [[i, j] for i, j in zip(a, c)]
+        top_artist_count = max(c) # helpful for scaling the visualizations
 
         a = list(album_d.keys())[-num_album:][::-1]
         c = [i[0] for i in list(album_d.values())[-num_artist:][::-1]] 
@@ -66,6 +67,7 @@ def main():
             "raw_playlist_data": raw_playlist_data,
             "artists_d": artists_d,
             "top_artists": top_artists,
+            "top_artist_count": 30,
             "top_albums": top_albums
         }
         
