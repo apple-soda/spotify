@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import random
 import copy
 
-from utils import *
+from spotify.views.utils import *
 
 ## SECRET SHIT (CHANGE FOR GITHUB PUSHES)
 # id and shit

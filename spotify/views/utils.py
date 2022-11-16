@@ -1,8 +1,4 @@
 import requests
-import json
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 
 def get_raw_playlist_data(base_url, playlist_id, headers):
@@ -37,14 +33,15 @@ def get_entire_playlist(base_url, track_id, headers):
         )
         d = r.json()
         master_list += d['items']
-    
+
     return master_list
+
 
 def get_artist_count(master_list):
     # ['track']['artists']: list of artists
     # ['track']['artists'][0]['name'] : name of first artist
     artists = {}
-    
+
     for i in master_list:
         an = i['track']['artists'][0]['name']
         if an in artists:
