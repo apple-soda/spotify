@@ -41,16 +41,28 @@ def main():
             BASE_URL, playlist_id, headers)
         playlist_list = utils.get_entire_playlist(BASE_URL, track_id, headers)
         artists_d = utils.get_artist_count(playlist_list)
+        album_d = utils.get_album_count(playlist_list)
 
         playlist_img_url = raw_playlist_data['images'][0]['url']
+
         num_artist = 5
-        top_artists = list(artists_d.keys())[-num_artist:][::-1]
+        num_album = 5
+
+        a = list(artists_d.keys())[-num_artist:][::-1]
+        c = list(artists_d.values())[-num_artist:][::-1]
+        top_artists = [[i, j] for i, j in zip(a, c)]
+
+        a = list(album_d.keys())[-num_album:][::-1]
+        c = [i[0] for i in list(album_d.values())[-num_artist:][::-1]] 
+            # album_d values are [album_count, album_url]
+        top_albums = [[i, j] for i, j in zip(a, c)]        
 
         context = {
             "playlist_img_url": playlist_img_url,
             "raw_playlist_data": raw_playlist_data,
             "artists_d": artists_d,
-            "top_artists": top_artists
+            "top_artists": top_artists,
+            "top_albums": top_albums
         }
         
         return render_template('analytics.html', **context)
