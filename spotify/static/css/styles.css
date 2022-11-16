@@ -186,7 +186,6 @@ h1 {
 /* rainbow spinner */
 .loader {
     background: black;
-    background: radial-gradient(#222, #000);
     overflow: hidden;
     position: fixed;
     z-index: -1;
