@@ -37,11 +37,12 @@ def main():
         track_id = link.split('/')[-1].split('?')[0]
         playlist_id = link.split('/')[-1]
 
-        raw_playlist_data = utils.get_raw_playlist_data(
-            BASE_URL, playlist_id, headers)
+        raw_playlist_data = utils.get_raw_playlist_data(BASE_URL, playlist_id, headers)
         playlist_list = utils.get_entire_playlist(BASE_URL, track_id, headers)
         artists_d = utils.get_artist_count(playlist_list)
         album_d = utils.get_album_count(playlist_list)
+
+        playlist_name = raw_playlist_data['name']
 
         playlist_img_url = raw_playlist_data['images'][0]['url']
 
@@ -54,10 +55,12 @@ def main():
 
         a = list(album_d.keys())[-num_album:][::-1]
         c = [i[0] for i in list(album_d.values())[-num_artist:][::-1]] 
-            # album_d values are [album_count, album_url]
-        top_albums = [[i, j] for i, j in zip(a, c)]        
+        c_urls = [i[1]['url'] for i in list(album_d.values())[-num_artist:][::-1]]
+
+        top_albums = [[i, j, k] for i, j, k in zip(a, c, c_urls)]      
 
         context = {
+            "playlist_name": playlist_name,
             "playlist_img_url": playlist_img_url,
             "raw_playlist_data": raw_playlist_data,
             "artists_d": artists_d,
