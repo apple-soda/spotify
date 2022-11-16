@@ -26,12 +26,10 @@
     <img src="{{ playlist_img_url }}">
 
     {% if artists_d %}
-    <h1>Top Artist: <label id='ta'></label></h1>
-    <py-script>
-        x = {{ artists_d }}
-        lol = list(x.keys())[-1]
-        pyscript.write('ta', lol)
-    </py-script>
+    <h1>Top Artist:</h1>
+    {% for artist in top_artists %}
+    <h3>{{artist}}</h3>
+    {% endfor %}
     {% endif %}
 </body>
 

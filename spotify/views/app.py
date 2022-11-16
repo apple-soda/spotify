@@ -43,17 +43,15 @@ def main():
         artists_d = utils.get_artist_count(playlist_list)
 
         playlist_img_url = raw_playlist_data['images'][0]['url']
-
-        print(playlist_img_url)
+        num_artist = 5
+        top_artists = list(artists_d.keys())[-num_artist:][::-1]
 
         context = {
             "playlist_img_url": playlist_img_url,
             "raw_playlist_data": raw_playlist_data,
-            "artists_d": artists_d
+            "artists_d": artists_d,
+            "top_artists": top_artists
         }
-
-        # lot of parameters to pass lowkey
-        # NOTE: urls need to be passed as a separate parameter :/
-        # get fucked bitch
+        
         return render_template('analytics.html', **context)
     return render_template('index.html')
