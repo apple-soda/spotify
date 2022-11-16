@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 def get_raw_playlist_data(base_url, playlist_id, headers):
     r = requests.get(
-        base_url + 'playlists/' + playlist_id + '/tracks',
+        base_url + 'playlists/' + playlist_id,
         headers=headers,
         params={'offset': 0}
     )
@@ -58,4 +58,13 @@ def get_artist_count(master_list):
 def get_album_count(master_list):
     # ['track']['album']['name'] : album name
     # ['track']['album']['images'][0] : album image
-    return None
+    albums = {}
+    for i in master_list:
+        an = i['track']['album']['name']
+        if an in albums:
+            albums[an][0] += 1
+        else:
+            album_cover = i['track']['album']['images'][0]
+            albums[an] = [1, album_cover]
+        
+    return dict(sorted(albums.items(), key=lambda item: item[1][0]))
