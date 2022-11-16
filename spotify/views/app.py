@@ -49,6 +49,7 @@ def main():
         num_artist = 5
         num_album = 5
 
+        # god genius coder matty right here fr
         a = list(artists_d.keys())[-num_artist:][::-1]
         c = list(artists_d.values())[-num_artist:][::-1]
         top_artists = [[i, j] for i, j in zip(a, c)]

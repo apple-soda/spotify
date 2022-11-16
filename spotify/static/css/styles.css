@@ -48,3 +48,64 @@ h1 {
     -ms-transform: scale(1.1);
     -o-transform: scale(1.1);
 }
+
+table {
+    height: 300px;
+    max-width: 600px;
+    margin: 0 auto;
+    border-spacing: 0 8px;
+}
+
+.table th {
+    padding: 100px;
+}
+
+.tran {
+    transform: translate(0px, 100%);
+    -webkit-transform: translate(0px, 100%);
+    -moz-transform: translate(0px, 100%);
+    -ms-transform: translate(0px, 100%);
+    -o-transform: translate(0px, 100%);
+}
+
+.my-chart.column {
+    --labels-size: 1px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 85%;
+    width: 85%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: black;
+    -webkit-transition: .5s ease;
+    -moz-transition: .5s ease;
+    -ms-transition: .5s ease;
+    -o-transition: .5s ease;
+}
+
+.text {
+    color: white;
+    font-size: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    width: 50%;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+}
