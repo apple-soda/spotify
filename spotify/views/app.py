@@ -1,5 +1,5 @@
 """Spotify main view."""
-from flask import render_template, request
+import flask
 import requests
 import spotify
 import spotify.views.utils as utils
@@ -28,48 +28,66 @@ headers = {
 }
 
 
-@spotify.app.route('/', methods=['POST', 'GET'])
+@spotify.app.route('/', methods=['GET', 'POST'])
 def main():
-    if request.method == 'POST':
-        link = request.form['link']
+    if flask.request.method == 'POST':
+        flask.session['link'] = flask.request.form['link']
+        return flask.redirect(flask.url_for('show_analytics'))
+    return flask.render_template('index.html')
 
-        # do some transformations
-        track_id = link.split('/')[-1].split('?')[0]
-        playlist_id = link.split('/')[-1]
 
-        raw_playlist_data = utils.get_raw_playlist_data(BASE_URL, playlist_id, headers)
-        playlist_list = utils.get_entire_playlist(BASE_URL, track_id, headers)
-        artists_d = utils.get_artist_count(playlist_list)
-        album_d = utils.get_album_count(playlist_list)
+@spotify.app.route('/analytics')
+def show_analytics():
+    link = flask.session['link']
 
-        playlist_name = raw_playlist_data['name']
+    # do some transformations
+    track_id = link.split('/')[-1].split('?')[0]
+    playlist_id = link.split('/')[-1]
 
-        playlist_img_url = raw_playlist_data['images'][0]['url']
+    raw_playlist_data = utils.get_raw_playlist_data(
+        BASE_URL, playlist_id, headers)
 
-        num_artist = 10
-        num_album = 5
+    # if raw_playlist_data[]
+    if not isinstance(raw_playlist_data, dict):
+        print("is not a dict")
+        return raw_playlist_data  # actually return redirect to index.html
 
-        # god genius coder matty right here fr
-        a = list(artists_d.keys())[-num_artist:][::-1]
-        c = list(artists_d.values())[-num_artist:][::-1]
-        top_artists = [[i, j] for i, j in zip(a, c)]
-        top_artist_count = max(c) # helpful for scaling the visualizations
+    playlist_list = utils.get_entire_playlist(BASE_URL, track_id, headers)
+    artists_d = utils.get_artist_count(playlist_list)
+    album_d = utils.get_album_count(playlist_list)
 
-        a = list(album_d.keys())[-num_album:][::-1]
-        c = [i[0] for i in list(album_d.values())[-num_artist:][::-1]] 
-        c_urls = [i[1]['url'] for i in list(album_d.values())[-num_artist:][::-1]]
+    playlist_name = raw_playlist_data['name']
 
-        top_albums = [[i, j, k] for i, j, k in zip(a, c, c_urls)]      
+    playlist_img_url = raw_playlist_data['images'][0]['url']
 
-        context = {
-            "playlist_name": playlist_name,
-            "playlist_img_url": playlist_img_url,
-            "raw_playlist_data": raw_playlist_data,
-            "artists_d": artists_d,
-            "top_artists": top_artists,
-            "top_artist_count": 30,
-            "top_albums": top_albums
-        }
-        
-        return render_template('analytics.html', **context)
-    return render_template('index.html')
+    num_artist = 10
+    num_album = 5
+
+    # god genius coder matty right here fr
+    a = list(artists_d.keys())[-num_artist:][::-1]
+    c = list(artists_d.values())[-num_artist:][::-1]
+    top_artists = [[i, j] for i, j in zip(a, c)]
+    top_artist_count = max(c)  # helpful for scaling the visualizations
+
+    a = list(album_d.keys())[-num_album:][::-1]
+    c = [i[0] for i in list(album_d.values())[-num_artist:][::-1]]
+    c_urls = [i[1]['url']
+              for i in list(album_d.values())[-num_artist:][::-1]]
+
+    top_albums = [[i, j, k] for i, j, k in zip(a, c, c_urls)]
+
+    context = {
+        "playlist_name": playlist_name,
+        "playlist_img_url": playlist_img_url,
+        "raw_playlist_data": raw_playlist_data,
+        "artists_d": artists_d,
+        "top_artists": top_artists,
+        "top_artist_count": 30,
+        "top_albums": top_albums
+    }
+    return flask.render_template('analytics.html', **context)
+
+
+@spotify.app.route('/', methods=['GET'])
+def back_home():
+    return flask.redirect(flask.url_for('main'))

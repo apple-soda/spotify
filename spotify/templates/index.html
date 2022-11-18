@@ -26,7 +26,11 @@
         <div class="p-3 align-self-center">
 
             <form action="/" method="POST">
+                {% if error %}
+                <input placeholder="enter valid spotify playlist link" name="link" class="submissionfield invalid-url" />
+                {% else %}
                 <input placeholder="spotify playlist link" name="link" class="submissionfield" />
+                {% endif %}
                 <input type="submit" value="Submit" class="zoom submissionbutton" />
             </form>
 

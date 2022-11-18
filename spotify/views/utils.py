@@ -1,3 +1,4 @@
+import flask
 import requests
 
 
@@ -7,6 +8,8 @@ def get_raw_playlist_data(base_url, playlist_id, headers):
         headers=headers,
         params={'offset': 0}
     )
+    if r.status_code != 200:
+        return flask.redirect(flask.url_for('main'))
     d = r.json()
     return d
 

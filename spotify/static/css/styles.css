@@ -26,6 +26,10 @@ form {
     text-align: center;
 }
 
+.invalid-url::placeholder {
+    color: red;
+}
+
 .zoom {
     margin: 0 auto;
     /*Animation*/
